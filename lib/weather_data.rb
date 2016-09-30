@@ -4,7 +4,7 @@ require 'json'
 
 class WeatherData
 
-  API_URL = 'http://api.wunderground.com/api/fb3946a1b0abcf37/conditions/q/England/London.json'
+  API_URL = 'http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=b92d678b77f2277c5fff2ba0c83be2d3&units=metric'
   MAX_RECORDS = 100
 
   def initialize
@@ -20,15 +20,42 @@ class WeatherData
 
   private
 
-  def get_current_temp
+  def get_weather_data_json
     open(@api_url) do |api_data|
-      weather_conditions = JSON.parse(api_data.read)
-      return weather_conditions['current_observation']['temp_f']
+      return JSON.parse(api_data.read)
     end
   end
 
+  def get_current_temp(weather_data)
+    weather_data['main']['temp']
+  end
+
+  def get_current_windspeed(weather_data)
+    weather_data['wind']['speed']
+  end
+
+  def get_current_winddirection(weather_data)
+    weather_data['wind']['deg']
+  end
+
+  def get_current_humidity(weather_data)
+    (weather_data['main']['humidity']).to_f/100
+  end
+
+  def get_current_rainvolume(weather_data)
+    rain = weather_data['rain']['3h']
+    return rain ||= 0 #if no rain, converts nil to 0
+  end
+
   def build_weather_record
-    @temp_history.push({timestamp: DateTime.now, temp: get_current_temp})
+    weather_data = get_weather_data_json
+    @temp_history.push({timestamp: DateTime.now,
+                        temp: get_current_temp(weather_data),
+                        windspeed: get_current_windspeed(weather_data),
+                        winddirection: get_current_winddirection(weather_data),
+                        humidity: get_current_humidity(weather_data),
+                        rain: get_current_rainvolume(weather_data)
+                        })
   end
 
 end

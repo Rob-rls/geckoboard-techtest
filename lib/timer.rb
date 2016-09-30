@@ -5,20 +5,27 @@ class Timer
   def initialize(weather, geckoboard)
     @weather = weather
     @geckoboard = geckoboard
+  end
+
+  def start_api_updates
     Thread.start { exit_command }
-    begin_loop
+    begin_api_update_loop
   end
 
   private
 
   def exit_command
-    while gets.strip !~ /^exit$/i
+    while exit_condition?
       puts "Invalid command"
     end
     abort "Exiting the program"
   end
 
-  def begin_loop
+  def exit_condition?
+    gets.strip !~ /^exit$/i
+  end
+
+  def begin_api_update_loop
     loop do
       update_geckoboard
       next_update_message

@@ -20,9 +20,13 @@ class GeckoboardRequest
   end
 
   def load_dataset
-    @dataset = @client.datasets.find_or_create('londontemp.by_time', fields: [
+    @dataset = @client.datasets.find_or_create('london.weather', fields: [
             Geckoboard::DateTimeField.new(:timestamp, name: 'Time'),
-            Geckoboard::NumberField.new(:temp, name: 'Temperature')
+            Geckoboard::NumberField.new(:temp, name: 'Temperature'),
+            Geckoboard::NumberField.new(:windspeed, name: 'Wind Speed'),
+            Geckoboard::NumberField.new(:winddirection, name: 'Wind Direction'),
+            Geckoboard::PercentageField.new(:humidity, name: 'Humidity'),
+            Geckoboard::NumberField.new(:rain, name: 'Rain Volume')
           ])
   end
 
