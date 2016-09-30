@@ -45,3 +45,6 @@ Some additional features I have thought up are below:
 * Menu options for selecting location of the weather information or perhaps to create multiple updates for several cities to use on different dashboards
 * Options to toggle updating the dashboard and/or the weather API.  The user might wish to keep getting the data updates from the Weather api saved to their database, but might want to 'turn-off' the dashbaord.  
 * The weather API contains loads more data to integrate
+
+
+PLEASE NOTE: Normally I wouldn't hardcode api keys.  I would store them in the local environment that doesn't get uploaded to github.  The reason I did put them in this repo is do that you can download the code and run it right away.
