@@ -2,7 +2,7 @@ require 'weather_data'
 
 describe WeatherData do
 
-  context '#send_temp_data' do
+  context '#send_weather_data' do
 
     it 'returns a json format set of weather data' do
       weatherdata = WeatherData.new
@@ -13,7 +13,7 @@ describe WeatherData do
       allow(weatherdata).to receive(:get_current_winddirection).and_return(5)
       allow(weatherdata).to receive(:get_current_humidity).and_return(55)
       allow(weatherdata).to receive(:get_current_rainvolume).and_return(2)
-      expect(weatherdata.send_temp_data).to eq([{timestamp: time_now,
+      expect(weatherdata.send_weather_data).to eq([{timestamp: time_now,
                                                 temp: 21,
                                                 windspeed: 10,
                                                 winddirection: 5,

@@ -4,4 +4,6 @@ require_relative 'lib/timer.rb'
 
 geckoboard = GeckoboardRequest.new
 weather = WeatherData.new
-Timer.new(weather, geckoboard)
+timer = Timer.new(weather, geckoboard)
+
+timer.start_api_updates

@@ -34,7 +34,7 @@ class Timer
   end
 
   def update_geckoboard
-    @geckoboard.update_dataset(@weather.send_temp_data)
+    @geckoboard.update_dataset(@weather.send_weather_data)
     puts "Geckoboard updated"
   end
 

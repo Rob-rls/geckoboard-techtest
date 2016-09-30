@@ -12,7 +12,7 @@ class WeatherData
     @temp_history = []
   end
 
-  def send_temp_data
+  def send_weather_data
     build_weather_record
     @temp_history.shift if @temp_history.length > MAX_RECORDS
     return @temp_history
