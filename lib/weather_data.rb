@@ -27,19 +27,23 @@ class WeatherData
   end
 
   def get_current_temp(weather_data)
-    weather_data['main']['temp']
+    temp = weather_data['main']['temp']
+    return temp ||= 0 # if not measured, converts nil to 0
   end
 
   def get_current_windspeed(weather_data)
-    weather_data['wind']['speed']
+    windspeed = weather_data['wind']['speed']
+    return windspeed ||= 0 # if not measured, converts nil to 0
   end
 
   def get_current_winddirection(weather_data)
-    weather_data['wind']['deg']
+    winddirection = weather_data['wind']['deg']
+    return winddirection ||= 0 # if not measured, converts nil to 0
   end
 
   def get_current_humidity(weather_data)
-    (weather_data['main']['humidity']).to_f/100
+    humidity = (weather_data['main']['humidity']).to_f/100
+    return humidity ||= 0 # if not measured, converts nil to 0
   end
 
   def get_current_rainvolume(weather_data)
